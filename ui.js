@@ -32,18 +32,21 @@ function inicializarGrafica() {
 
 function detenerSimulacion() {
     clearInterval(intervaloSimulacion);
+
     const esperaProm = historialEspera.length > 0
-        ? (historialEspera.reduce((a,b)=>a+b,0)/historialEspera.length).toFixed(2) : 0;
+        ? (historialEspera.reduce((a, b) => a + b, 0) / historialEspera.length).toFixed(2) : 0;
 
     const ocupacion = ((tiempoTrabajoTotal / (cajeros.length * reloj)) * 100).toFixed(2);
 
-    alert(`Informe Final de Operaciones
-    ---------------------------------
-    Tiempo Total: ${reloj.toFixed(1)} min
-    Espera Promedio: ${esperaProm} min
-    Ocupación Promedio: ${ocupacion}%
-    Clientes Atendidos: ${clientesAtendidos}
-    Abandonos por Fila Larga: ${clientesAbandonan}`);
+    document.getElementById('resTiempo').innerText = reloj.toFixed(1) + " min";
+    document.getElementById('resEspera').innerText = esperaProm + " min";
+    document.getElementById('resOcupacion').innerText = ocupacion + "%";
+    document.getElementById('resAtendidos').innerText = clientesAtendidos;
+    document.getElementById('resAbandonos').innerText = clientesAbandonan;
+
+    document.getElementById('panelInforme').style.display = 'block';
+
+    document.getElementById('panelInforme').scrollIntoView({ behavior: 'smooth' });
 }
 
 function dibujarCajerosUI() {
