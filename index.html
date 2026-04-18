@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador Bancario - Análisis M/M/c</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+    <h2>Simulación de Sucursal Bancaria</h2>
+    <p>Análisis de optimización de recursos y tiempos de espera</p>
+</header>
+
+<main>
+    <section class="dashboard-controls">
+        <div class="control-group">
+            <label>Cajeros: <span id="valCajeros">3</span></label>
+            <input type="range" id="inputCajeros" min="1" max="5" value="3" oninput="document.getElementById('valCajeros').innerText = this.value">
+        </div>
+
+        <div class="control-group">
+            <label>Clientes/Hora (λ): <span id="valLambda">90</span></label>
+            <input type="range" id="inputLambda" min="10" max="300" value="90" oninput="document.getElementById('valLambda').innerText = this.value">
+        </div>
+
+        <div class="control-group">
+            <label>Atención (min): <span id="valMu">2.0</span></label>
+            <input type="range" id="inputMu" min="0.5" max="10" step="0.5" value="2.0" oninput="document.getElementById('valMu').innerText = this.value">
+        </div>
+
+        <div class="control-group">
+            <label>Impaciencia (%): <span id="valPaciencia">50</span>%</label>
+            <input type="range" id="inputPaciencia" min="0" max="100" value="50" oninput="document.getElementById('valPaciencia').innerText = this.value">
+        </div>
+
+        <button onclick="configurarSimulacion()">Iniciar Simulación</button>
+    </section>
+
+    <div class="stat-box">
+        <label>Abandonos (Fila Larga)</label>
+        <span id="txtAbandonos">0</span>
+    </div>
+
+    <section class="main-container">
+        <div class="card">
+            <h3>Estado de Cajeros</h3>
+            <div id="cajerosArea" class="cajeros-grid">
+            </div>
+        </div>
+
+        <div class="card">
+            <h3>Fila de Espera (Máx. 10)</h3>
+            <div id="colaArea" class="cola-visual">
+            </div>
+        </div>
+    </section>
+
+    <section class="stats-grid">
+        <div class="stat-box">
+            <label>Reloj (Seg)</label>
+            <span id="txtReloj">0</span>
+        </div>
+        <div class="stat-box">
+            <label>En Fila</label>
+            <span id="txtCola">0</span>
+        </div>
+        <div class="stat-box">
+            <label>Atendidos</label>
+            <span id="txtAtendidos">0</span>
+        </div>
+        <div class="stat-box">
+            <label>Rechazados</label>
+            <span id="txtRechazados">0</span>
+        </div>
+    </section>
+
+    <section class="chart-container">
+        <h3>Evolución de la Cola en el Tiempo</h3>
+        <canvas id="graficaCola"></canvas>
+    </section>
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
