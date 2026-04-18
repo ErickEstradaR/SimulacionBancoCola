@@ -33,10 +33,15 @@ function inicializarGrafica() {
 function detenerSimulacion() {
     clearInterval(intervaloSimulacion);
 
+    //si hay historial de espera sumo todos los tiempos y los divido entre la cantidad de clientes,
+    // el metodofixed formatea y redondea a dos decimales; de lo contrario devuelve 0
     const esperaProm = historialEspera.length > 0
         ? (historialEspera.reduce((a, b) => a + b, 0) / historialEspera.length).toFixed(2) : 0;
 
     const ocupacion = ((tiempoTrabajoTotal / (cajeros.length * reloj)) * 100).toFixed(2);
+    // ocupacion la calculo dividiendo el tiempo que se trabajo entre cantidad de cajeros * tiempo,
+    // el metodo fixed formatea y redondea
+
 
     document.getElementById('resTiempo').innerText = reloj.toFixed(1) + " min";
     document.getElementById('resEspera').innerText = esperaProm + " min";
@@ -48,6 +53,8 @@ function detenerSimulacion() {
 
     document.getElementById('panelInforme').scrollIntoView({ behavior: 'smooth' });
 }
+
+
 
 function dibujarCajerosUI() {
     const area = document.getElementById('cajerosArea');

@@ -42,6 +42,7 @@ function configurarSimulacion() {
 
 function procesarPaso() {
     reloj += PASO_TIEMPO;
+    reloj = Math.round(reloj * 10) / 10;
 
     if (reloj >= proximaLlegada) {
         ultimoIdCliente++;
@@ -51,7 +52,7 @@ function procesarPaso() {
             if (Math.random() < probabilidadAbandono) {
                 clientesAbandonan++;
             } else {
-                colaClientes.push(nuevoCliente);
+                clientesRechazados++;
             }
         } else {
             colaClientes.push(nuevoCliente);
